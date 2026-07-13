@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var maximum_speed := 400.0
 @export var rotation_speed := 200.0
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("move_forward", "move_backward")
 	var input_vector := Vector2(0, direction)
@@ -26,6 +28,10 @@ func _physics_process(delta: float) -> void:
 
 func wraparound() -> void:
 	var screen_size := get_viewport_rect().size
+	var sprite_size := sprite.texture.get_size() * sprite.scale
 
-	global_position.x = wrapf(global_position.x, 0, screen_size.x)
-	global_position.y = wrapf(global_position.y, 0, screen_size.y)
+	var hx: float = sprite_size.x / 2
+	var hy: float = sprite_size.y / 2
+
+	global_position.x = wrapf(global_position.x, -hx, screen_size.x + hx)
+	global_position.y = wrapf(global_position.y, -hy, screen_size.y + hy)
