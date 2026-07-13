@@ -22,8 +22,11 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, 3)
 	
 	move_and_slide()
-	
+	wraparound()
+
+func wraparound() -> void:
 	var screen_size := get_viewport_rect().size
+
 	if global_position.y < 0:
 		global_position.y = screen_size.y
 	elif global_position.y > screen_size.y:
