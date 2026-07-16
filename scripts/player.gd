@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 
 @export var speed := 10.0
-@export var maximum_speed := 400.0
-@export var rotation_speed := 200.0
+@export var maximum_speed := 500.0
+@export var rotation_speed := 300.0
 
 @onready var sprite: Sprite2D = $Sprite2D
 
