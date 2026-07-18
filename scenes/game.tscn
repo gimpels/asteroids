@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://cwyb7n4et0hhr"]
 
 [ext_resource type="PackedScene" uid="uid://2c7ivlwkgvw2" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://brsy0jdn43gtw" path="res://scripts/game.gd" id="1_yqjtg"]
 
 [node name="Game" type="Node2D" unique_id=1613027338]
+script = ExtResource("1_yqjtg")
 
 [node name="Player" parent="." unique_id=233649266 instance=ExtResource("1_uwrxv")]
 position = Vector2(960, 510)
+
+[node name="Lasers" type="Node2D" parent="." unique_id=2127661443]

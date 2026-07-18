@@ -2,11 +2,10 @@ extends Area2D
 
 @export var speed := 500.0
 
-var movement_vector := Vector2(0, -1)
+const direction := Vector2(0, -1)
 
 func _physics_process(delta: float) -> void:
-	global_position += movement_vector.rotated(rotation) * speed * delta
+	global_position += direction.rotated(rotation) * speed * delta
 
-
-func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+func _on_screen_exited() -> void:
 	queue_free()
