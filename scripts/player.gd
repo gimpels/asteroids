@@ -14,6 +14,10 @@ var laser_scene := preload("res://scenes/laser.tscn")
 
 var shoot_cooldown := false
 
+func _ready() -> void:
+	var screen_center = get_viewport_rect().size / 2
+	global_position = screen_center
+
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("shoot"):
 		if !shoot_cooldown:
