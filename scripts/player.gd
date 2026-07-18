@@ -9,13 +9,14 @@ signal laser_shot(laser)
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var muzzle := $Muzzle
+@onready var viewport := get_viewport()
 
 var laser_scene := preload("res://scenes/laser.tscn")
 
 var shoot_cooldown := false
 
 func _ready() -> void:
-	var screen_center = get_viewport_rect().size / 2
+	var screen_center: Vector2i = viewport.size / 2
 	global_position = screen_center
 
 func _process(_delta: float) -> void:
@@ -48,7 +49,7 @@ func _physics_process(delta: float) -> void:
 	wraparound()
 
 func wraparound() -> void:
-	var screen_size := get_viewport_rect().size
+	var screen_size: Vector2i = viewport.size
 	var sprite_size := sprite.texture.get_size() * sprite.scale
 
 	var hx: float = sprite_size.x / 2
