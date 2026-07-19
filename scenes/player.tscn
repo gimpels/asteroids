@@ -2,8 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://xclrtk2rciw5" path="res://assets/textures/player_ship.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://b7kn2702kt1i5" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://cuj005x82if8k" path="res://components/screen_wrap.gd" id="3_qhqgy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
+size = Vector2(66.92412, 36.161163)
 
 [node name="Player" type="CharacterBody2D" unique_id=233649266]
 collision_layer = 2
@@ -14,7 +16,14 @@ script = ExtResource("1_g2els")
 texture = ExtResource("1_3vyb7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1843396924]
-shape = SubResource("CircleShape2D_g2els")
+position = Vector2(-3.2186508e-06, -0.49999934)
+rotation = 3.1415925
+scale = Vector2(1.6735373, -2.0740483)
+shape = SubResource("RectangleShape2D_qhqgy")
 
 [node name="Muzzle" type="Node2D" parent="." unique_id=757384105]
 position = Vector2(0, -50)
+
+[node name="ScreenWrap" type="Node2D" parent="." unique_id=2142696223 node_paths=PackedStringArray("target_body")]
+script = ExtResource("3_qhqgy")
+target_body = NodePath("..")

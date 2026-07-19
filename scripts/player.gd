@@ -8,6 +8,7 @@ signal laser_shot(laser)
 @export var fire_rate := 0.1
 
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var screen_wrap := $ScreenWrap
 @onready var muzzle := $Muzzle
 @onready var viewport := get_viewport()
 
@@ -18,6 +19,8 @@ var shoot_cooldown := false
 func _ready() -> void:
 	var screen_center: Vector2i = viewport.size / 2
 	global_position = screen_center
+	
+	screen_wrap.size = sprite.texture.get_size()
 
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("shoot"):
@@ -46,17 +49,6 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.move_toward(Vector2.ZERO, 3)
 	
 	move_and_slide()
-	wraparound()
-
-func wraparound() -> void:
-	var screen_size: Vector2i = viewport.size
-	var sprite_size := sprite.texture.get_size() * sprite.scale
-
-	var hx: float = sprite_size.x / 2
-	var hy: float = sprite_size.y / 2
-
-	global_position.x = wrapf(global_position.x, -hx, screen_size.x + hx)
-	global_position.y = wrapf(global_position.y, -hy, screen_size.y + hy)
 
 func shoot_laser() -> void:
 	var laser = laser_scene.instantiate()
