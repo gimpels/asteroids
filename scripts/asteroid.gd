@@ -3,13 +3,15 @@ class_name Asteroid extends Area2D
 signal exploded(position, size)
 
 enum AsteroidSize { BIG, MEDIUM, SMALL, TINY }
+
+const DIRECTION := Vector2(0, -1)
+
 @export var size := AsteroidSize.BIG
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 @onready var screen_wrap := $ScreenWrap
 
-var direction := Vector2(0, -1)
 var speed := 100.0
 
 func _ready() -> void:
@@ -39,8 +41,10 @@ func _ready() -> void:
 	screen_wrap.target_body = self
 	screen_wrap.size = sprite.texture.get_size()
 
+
 func _physics_process(delta: float) -> void:
-	global_position += direction.rotated(rotation) * speed * delta
+	global_position += DIRECTION.rotated(rotation) * speed * delta
+
 
 func explode() -> void:
 	emit_signal("exploded", global_position, size)

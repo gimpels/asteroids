@@ -6,8 +6,10 @@ extends Node2D
 
 @onready var viewport := get_viewport()
 
+
 func _physics_process(_delta: float) -> void:
 	wraparound()
+
 
 func wraparound() -> void:
 	var screen_size: Vector2i = viewport.size
