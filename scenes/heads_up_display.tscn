@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dd645opdmabab"]
+
+[ext_resource type="Script" uid="uid://k7rgga6ng0k5" path="res://scripts/heads_up_display.gd" id="1_jcvpm"]
+[ext_resource type="FontFile" uid="uid://ca5wtmmkgw8ys" path="res://assets/fonts/kenvector_future_thin.ttf" id="2_2n6sv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mw38o"]
+font = ExtResource("2_2n6sv")
+font_size = 48
+
+[node name="HeadsUpDisplay" type="Control" unique_id=1758792103]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_jcvpm")
+
+[node name="Score" type="Label" parent="." unique_id=14135759]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 393.0
+offset_bottom = 74.0
+text = "SCORE: 0"
+label_settings = SubResource("LabelSettings_mw38o")

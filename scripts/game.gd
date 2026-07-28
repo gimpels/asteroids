@@ -5,6 +5,12 @@ var asteroid_scene := preload("res://scenes/asteroid.tscn")
 @onready var lasers := $Lasers
 @onready var player := $Player
 @onready var asteroids := $Asteroids
+@onready var hud := $UserInterface/HeadsUpDisplay
+
+@onready var score: int = 0:
+	set(value):
+		score = value
+		hud.score = score
 
 
 func _ready() -> void:
@@ -23,7 +29,7 @@ func _on_player_laser_shot(laser: Variant) -> void:
 	lasers.add_child(laser)
 
 
-func _on_asteroid_exploded(asteroid_position: Vector2, size: Asteroid.AsteroidSize) -> void:
+func _on_asteroid_exploded(asteroid_position: Vector2, size: Asteroid.AsteroidSize, points: int) -> void:
 	match size:
 		Asteroid.AsteroidSize.BIG:
 			spawn_asteroid(asteroid_position, Asteroid.AsteroidSize.MEDIUM)
@@ -39,6 +45,8 @@ func _on_asteroid_exploded(asteroid_position: Vector2, size: Asteroid.AsteroidSi
 
 		Asteroid.AsteroidSize.TINY:
 			pass
+
+	score += points
 
 
 func spawn_asteroid(asteroid_position: Vector2, size: Asteroid.AsteroidSize) -> void:

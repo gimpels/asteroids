@@ -2,10 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://2c7ivlwkgvw2" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://brsy0jdn43gtw" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://dd645opdmabab" path="res://scenes/heads_up_display.tscn" id="2_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dbtsaevjcfkuc" path="res://scenes/asteroid.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D" unique_id=1613027338]
 script = ExtResource("1_yqjtg")
+
+[node name="UserInterface" type="CanvasLayer" parent="." unique_id=1481268172]
+
+[node name="HeadsUpDisplay" parent="UserInterface" unique_id=1758792103 instance=ExtResource("2_lbhrr")]
 
 [node name="Player" parent="." unique_id=233649266 instance=ExtResource("1_uwrxv")]
 position = Vector2(960, 510)
