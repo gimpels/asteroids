@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bmq3ibh4i37xj"]
+
+[ext_resource type="Script" uid="uid://cu1tbre3u8jj4" path="res://scripts/game_over.gd" id="1_wqhvx"]
+[ext_resource type="FontFile" uid="uid://ca5wtmmkgw8ys" path="res://assets/fonts/kenvector_future_thin.ttf" id="1_xeevv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wqhvx"]
+font = ExtResource("1_xeevv")
+font_size = 72
+
+[node name="GameOver" type="Control" unique_id=693078387]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wqhvx")
+
+[node name="Message" type="Label" parent="." unique_id=473087917]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -117.0
+offset_right = 218.0
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_wqhvx")
+
+[node name="Restart" type="Button" parent="." unique_id=1029254456]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 7.0
+offset_right = 134.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_xeevv")
+theme_override_font_sizes/font_size = 48
+text = "TRY AGAIN"
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

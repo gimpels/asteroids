@@ -22,3 +22,5 @@ shape = ExtResource("3_t4se3")
 [node name="ScreenWrap" type="Node2D" parent="." unique_id=1876553373]
 script = ExtResource("4_pnq5b")
 metadata/_custom_type_script = "uid://cuj005x82if8k"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,6 +1,7 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 signal laser_shot(laser)
+signal died()
 
 @export var speed := 10.0
 @export var maximum_speed := 500.0
@@ -10,6 +11,8 @@ signal laser_shot(laser)
 var shoot_cooldown := false
 var laser_scene := preload("res://scenes/laser.tscn")
 
+var alive = true
+
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var screen_wrap := $ScreenWrap
 @onready var muzzle := $Muzzle
@@ -17,9 +20,7 @@ var laser_scene := preload("res://scenes/laser.tscn")
 
 
 func _ready() -> void:
-	var screen_center: Vector2i = viewport.size / 2
-	global_position = screen_center
-	
+	set_init_position()
 	screen_wrap.size = sprite.texture.get_size()
 
 
@@ -53,9 +54,35 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+func set_init_position() -> void:
+	var screen_center: Vector2i = viewport.size / 2
+	global_position = screen_center
+
+
 func shoot_laser() -> void:
 	var laser = laser_scene.instantiate()
 	laser.global_position = muzzle.global_position
 	laser.rotation = rotation
 
 	emit_signal("laser_shot", laser)
+
+
+func die() -> void:
+	if alive:
+		alive = false
+		emit_signal("died")
+
+		sprite.visible = false
+		process_mode = Node.PROCESS_MODE_DISABLED
+
+
+func respawn() -> void:
+	if not alive:
+		alive = true
+
+		rotation = 0
+		velocity = Vector2.ZERO
+		set_init_position()
+
+		sprite.visible = true
+		process_mode = Node.PROCESS_MODE_INHERIT

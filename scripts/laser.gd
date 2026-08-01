@@ -14,8 +14,7 @@ func _on_screen_exited() -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	var asteroid: Asteroid = area
-
-	if asteroid:
+	if area is Asteroid:
+		var asteroid: Asteroid = area
 		asteroid.explode()
 		queue_free()

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://py4h2hckmw7o"]
+
+[ext_resource type="Texture2D" uid="uid://wpldr74gypjh" path="res://assets/textures/player_life.png" id="1_tf86k"]
+
+[node name="Life" type="TextureRect" unique_id=799022224]
+offset_right = 37.0
+offset_bottom = 26.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_tf86k")

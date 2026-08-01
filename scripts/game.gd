@@ -6,15 +6,26 @@ var asteroid_scene := preload("res://scenes/asteroid.tscn")
 @onready var player := $Player
 @onready var asteroids := $Asteroids
 @onready var hud := $UserInterface/HeadsUpDisplay
+@onready var game_over := $UserInterface/GameOver
+@onready var player_spawn_area := $PlayerSpawnArea
 
 @onready var score: int = 0:
 	set(value):
 		score = value
 		hud.score = score
 
+@onready var lives: int = 3:
+	set(value):
+		lives = value
+		hud.set_lives(lives)
 
 func _ready() -> void:
+	game_over.visible = false
+	lives = 3
+	score = 0
+
 	player.connect("laser_shot", _on_player_laser_shot)
+	player.connect("died", _on_player_died)
 
 	for asteroid in asteroids.get_children():
 		asteroid.connect("exploded", _on_asteroid_exploded)
@@ -27,6 +38,21 @@ func _process(_delta: float) -> void:
 
 func _on_player_laser_shot(laser: Variant) -> void:
 	lasers.add_child(laser)
+
+
+func _on_player_died() -> void:
+	lives -= 1
+
+	if lives <= 0:
+		await get_tree().create_timer(1).timeout
+		game_over.visible = true
+	else:
+		await get_tree().create_timer(1).timeout
+
+		while !player_spawn_area.is_empty:
+			await get_tree().create_timer(0.1).timeout
+
+		player.respawn()
 
 
 func _on_asteroid_exploded(asteroid_position: Vector2, size: Asteroid.AsteroidSize, points: int) -> void:
