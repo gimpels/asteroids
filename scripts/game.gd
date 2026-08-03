@@ -56,13 +56,12 @@ func _on_player_died() -> void:
 		await get_tree().create_timer(1).timeout
 		game_over.visible = true
 	else:
-		await get_tree().create_timer(1).timeout
-
 		player_dies_sound.play()
 
 		while !player_spawn_area.is_empty:
 			await get_tree().create_timer(1).timeout
-			player_dies_sound.play()
+
+		await get_tree().create_timer(1).timeout
 
 		player.respawn()
 
