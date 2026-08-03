@@ -61,7 +61,7 @@ func _on_player_died() -> void:
 		player_dies_sound.play()
 
 		while !player_spawn_area.is_empty:
-			await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(1).timeout
 			player_dies_sound.play()
 
 		player.respawn()

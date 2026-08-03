@@ -8,10 +8,10 @@ signal died()
 @export var rotation_speed := 300.0
 @export var fire_rate := 0.1
 
+var alive = false
 var shoot_cooldown := false
-var laser_scene := preload("res://scenes/laser.tscn")
 
-var alive = true
+var laser_scene := preload("res://scenes/laser.tscn")
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var screen_wrap := $ScreenWrap
@@ -20,6 +20,7 @@ var alive = true
 
 
 func _ready() -> void:
+	alive = true
 	set_init_position()
 	screen_wrap.size = sprite.texture.get_size()
 
@@ -70,19 +71,25 @@ func shoot_laser() -> void:
 func die() -> void:
 	if alive:
 		alive = false
-		emit_signal("died")
-
 		sprite.visible = false
-		process_mode = Node.PROCESS_MODE_DISABLED
+
+		toggle_monitoring(false)
+		emit_signal("died")
 
 
 func respawn() -> void:
 	if not alive:
-		alive = true
-
 		rotation = 0
 		velocity = Vector2.ZERO
+
 		set_init_position()
 
 		sprite.visible = true
-		process_mode = Node.PROCESS_MODE_INHERIT
+		alive = true
+
+		toggle_monitoring(true)
+
+
+func toggle_monitoring(flag: bool) -> void:
+	set_deferred("monitoring", flag)
+	set_deferred("monitorable", flag)
